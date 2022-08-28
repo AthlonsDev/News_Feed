@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val API_KEY = ""
+        val API_KEY = "09222197a3ee462bb339130b1c2089c0"
 
         val newsApiClient = NewsApiClient(API_KEY)
 
