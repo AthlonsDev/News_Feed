@@ -28,6 +28,9 @@ class MainActivity : AppCompatActivity() {
         headlines_button.setOnClickListener {
             getHeadlines(newsApiClient)
         }
+        news_button.setOnClickListener {
+            getEverything(newsApiClient)
+        }
 
 //        getSources(newsApiClient)
 
@@ -47,6 +50,8 @@ class MainActivity : AppCompatActivity() {
 //                        Log.d("NewsPrint", response.articles[i].title)
 //
 //                    }
+//                    Headlines show only Titles and Dates
+
                     headline_text.text = response.articles[0].title
                     news_content.text = response.articles[0].content
                     news_author.text = response.articles[0].author
@@ -69,7 +74,11 @@ class MainActivity : AppCompatActivity() {
                 .build(),
             object : ArticlesResponseCallback {
                 override fun onSuccess(response: ArticleResponse) {
-                    println(response.articles[0].title)
+                    println(response.articles[0].content)
+                    headline_text.text = response.articles[0].title
+                    news_content.text = response.articles[0].content
+                    news_author.text = response.articles[0].author
+                    news_date.text = response.articles[0].publishedAt
                 }
 
                 override fun onFailure(throwable: Throwable) {
@@ -88,6 +97,7 @@ class MainActivity : AppCompatActivity() {
             object : SourcesCallback {
                 override fun onSuccess(response: SourcesResponse) {
                     Log.d("NewsPrint", response.sources[0].name)
+
                 }
 
                 override fun onFailure(throwable: Throwable) {
