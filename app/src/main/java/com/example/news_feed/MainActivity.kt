@@ -12,7 +12,7 @@ import com.kwabenaberko.newsapilib.models.request.SourcesRequest
 import com.kwabenaberko.newsapilib.models.request.TopHeadlinesRequest
 import com.kwabenaberko.newsapilib.models.response.ArticleResponse
 import com.kwabenaberko.newsapilib.models.response.SourcesResponse
-
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,8 +25,12 @@ class MainActivity : AppCompatActivity() {
 
         val newsApiClient = NewsApiClient(API_KEY)
 
-        getSources(newsApiClient)
-        getHeadlines(newsApiClient)
+        headlines_button.setOnClickListener {
+            getHeadlines(newsApiClient)
+        }
+
+//        getSources(newsApiClient)
+
     }
 
 
@@ -39,9 +43,16 @@ class MainActivity : AppCompatActivity() {
                 .build(),
             object : ArticlesResponseCallback {
                 override fun onSuccess(response: ArticleResponse) {
-                    for (i in 0..1) {
-                        Log.d("NewsPrint", response.articles[i].title)
-                    }
+//                    for (i in 0..1) {
+//                        Log.d("NewsPrint", response.articles[i].title)
+//
+//                    }
+                    headline_text.text = response.articles[0].title
+                    news_content.text = response.articles[0].content
+                    news_author.text = response.articles[0].author
+                    news_date.text = response.articles[0].publishedAt
+//                    news_URL.text = "Link ${response.articles[0].url}"
+
 
                 }
                 override fun onFailure(throwable: Throwable) {
