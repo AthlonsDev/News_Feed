@@ -38,25 +38,24 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun getHeadlines(newsApiClient: NewsApiClient) {
-        println("Reading API")
         newsApiClient.getTopHeadlines(
             TopHeadlinesRequest.Builder()
-                .q("Italy")
+                .q("NASA")
                 .language("en")
                 .build(),
             object : ArticlesResponseCallback {
                 override fun onSuccess(response: ArticleResponse) {
-//                    for (i in 0..1) {
-//                        Log.d("NewsPrint", response.articles[i].title)
-//
-//                    }
+                    for (i in 0..response.articles.size - 1) {
+                        Log.d("NewsPrint", response.articles[i].title)
+
+                    }
 //                    Headlines show only Titles and Dates
 
+
                     headline_text.text = response.articles[0].title
-                    news_content.text = response.articles[0].content
                     news_author.text = response.articles[0].author
                     news_date.text = response.articles[0].publishedAt
-//                    news_URL.text = "Link ${response.articles[0].url}"
+                    news_URL.text = "Link $response.articles[0].url"
 
 
                 }
@@ -70,15 +69,25 @@ class MainActivity : AppCompatActivity() {
     private fun getEverything(newsApiClient: NewsApiClient) {
         newsApiClient.getEverything(
             EverythingRequest.Builder()
-                .q("trump")
+                .q("NASA")
                 .build(),
             object : ArticlesResponseCallback {
                 override fun onSuccess(response: ArticleResponse) {
-                    println(response.articles[0].content)
+
+                    for (i in 0..response.articles.size - 1) {
+                        Log.d("NewsPrint", response.articles[i].title)
+
+                    }
+
                     headline_text.text = response.articles[0].title
-                    news_content.text = response.articles[0].content
-                    news_author.text = response.articles[0].author
-                    news_date.text = response.articles[0].publishedAt
+                    if(response.articles[0].content != null){
+                        news_content.text = response.articles[0].content
+                    } else {
+                        news_content.text = "News Content Unavailable"
+                    }
+                    news_author.text = "Author: " + response.articles[0].author
+                    news_date.text = "Published At" + response.articles[0].publishedAt
+                    news_URL.text = "Link: " + response.articles[0].url
                 }
 
                 override fun onFailure(throwable: Throwable) {
