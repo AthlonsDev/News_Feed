@@ -12,10 +12,14 @@ import com.kwabenaberko.newsapilib.models.request.SourcesRequest
 import com.kwabenaberko.newsapilib.models.request.TopHeadlinesRequest
 import com.kwabenaberko.newsapilib.models.response.ArticleResponse
 import com.kwabenaberko.newsapilib.models.response.SourcesResponse
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
+
+    val adapter = GroupAdapter<GroupieViewHolder>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,14 +29,18 @@ class MainActivity : AppCompatActivity() {
 
         val newsApiClient = NewsApiClient(API_KEY)
 
-        headlines_button.setOnClickListener {
-            getHeadlines(newsApiClient)
-        }
-        news_button.setOnClickListener {
-            getEverything(newsApiClient)
-        }
+//        headlines_button.setOnClickListener {
+//            getHeadlines(newsApiClient)
+//        }
+//        news_button.setOnClickListener {
+//            getEverything(newsApiClient)
+//        }
 
 //        getSources(newsApiClient)
+
+        news_recycler_view.adapter = adapter
+
+        getEverything(newsApiClient)
 
     }
 
@@ -52,10 +60,10 @@ class MainActivity : AppCompatActivity() {
 //                    Headlines show only Titles and Dates
 
 
-                    headline_text.text = response.articles[0].title
-                    news_author.text = response.articles[0].author
-                    news_date.text = response.articles[0].publishedAt
-                    news_URL.text = "Link $response.articles[0].url"
+//                    headline_text.text = response.articles[0].title
+//                    news_author.text = response.articles[0].author
+//                    news_date.text = response.articles[0].publishedAt
+//                    news_URL.text = "Link $response.articles[0].url"
 
 
                 }
@@ -77,17 +85,20 @@ class MainActivity : AppCompatActivity() {
                     for (i in 0..response.articles.size - 1) {
                         Log.d("NewsPrint", response.articles[i].title)
 
+
                     }
 
-                    headline_text.text = response.articles[0].title
-                    if(response.articles[0].content != null){
-                        news_content.text = response.articles[0].content
-                    } else {
-                        news_content.text = "News Content Unavailable"
-                    }
-                    news_author.text = "Author: " + response.articles[0].author
-                    news_date.text = "Published At" + response.articles[0].publishedAt
-                    news_URL.text = "Link: " + response.articles[0].url
+
+
+//                    headline_text.text = response.articles[0].title
+//                    if(response.articles[0].content != null){
+//                        news_content.text = response.articles[0].content
+//                    } else {
+//                        news_content.text = "News Content Unavailable"
+//                    }
+//                    news_author.text = "Author: " + response.articles[0].author
+//                    news_date.text = "Published At" + response.articles[0].publishedAt
+//                    news_URL.text = "Link: " + response.articles[0].url
                 }
 
                 override fun onFailure(throwable: Throwable) {
