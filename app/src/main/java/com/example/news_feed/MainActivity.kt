@@ -84,7 +84,8 @@ class MainActivity : AppCompatActivity() {
 
                     for (i in 0..response.articles.size - 1) {
                         Log.d("NewsPrint", response.articles[i].title)
-
+                        val model = NewsModel::class.java
+                        adapter.add(NewsEverythingRow(NewsModel()))
 
                     }
 
