@@ -1,7 +1,6 @@
 package com.example.news_feed
 
 import android.os.Bundle
-import android.os.Debug
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.kwabenaberko.newsapilib.NewsApiClient
@@ -15,6 +14,7 @@ import com.kwabenaberko.newsapilib.models.response.SourcesResponse
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.collections.forEach as forEach1
 
 
 class MainActivity : AppCompatActivity() {
@@ -53,8 +53,17 @@ class MainActivity : AppCompatActivity() {
                 .build(),
             object : ArticlesResponseCallback {
                 override fun onSuccess(response: ArticleResponse) {
+
+                    response.articles.forEach1 {
+                        val news = modelArray(it.title)
+                        adapter.add(NewsEverythingRow(news))
+                    }
+
+
                     for (i in 0..response.articles.size - 1) {
                         Log.d("NewsPrint", response.articles[i].title)
+
+
 
                     }
 //                    Headlines show only Titles and Dates
@@ -83,9 +92,8 @@ class MainActivity : AppCompatActivity() {
                 override fun onSuccess(response: ArticleResponse) {
 
                     for (i in 0..response.articles.size - 1) {
-                        Log.d("NewsPrint", response.articles[i].title)
+                        Log.d("NewsPrint", response.articles[i].toString())
 
-                        adapter.add(NewsEverythingRow(NewsModel()))
 //                        adapter.add(NewsEverythingRow(NewsModel()))
                     }
 
