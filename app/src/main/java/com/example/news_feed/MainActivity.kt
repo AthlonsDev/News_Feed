@@ -56,20 +56,14 @@ class MainActivity : AppCompatActivity() {
                 override fun onSuccess(response: ArticleResponse) {
 
                     response.articles.forEach1 {
+                        println(it.urlToImage)
                         if(it.title != null && it.source != null) {
-                            val news = modelArray(it.title, it.source.toString())
+                            val news = modelArray(it.title, it.publishedAt)
                             adapter.add(NewsEverythingRow(news))
                         }
 
                     }
 
-
-                    for (i in 0..response.articles.size - 1) {
-                        Log.d("NewsPrint", response.articles[i].title)
-
-
-
-                    }
 //                    Headlines show only Titles and Dates
 
 
