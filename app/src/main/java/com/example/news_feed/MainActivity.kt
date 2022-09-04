@@ -40,8 +40,9 @@ class MainActivity : AppCompatActivity() {
 
         news_recycler_view.adapter = adapter
 
-        getEverything(newsApiClient)
+//        getEverything(newsApiClient)
 
+            getHeadlines(newsApiClient)
     }
 
 
@@ -55,8 +56,11 @@ class MainActivity : AppCompatActivity() {
                 override fun onSuccess(response: ArticleResponse) {
 
                     response.articles.forEach1 {
-                        val news = modelArray(it.title)
-                        adapter.add(NewsEverythingRow(news))
+                        if(it.title != null && it.source != null) {
+                            val news = modelArray(it.title, it.source.toString())
+                            adapter.add(NewsEverythingRow(news))
+                        }
+
                     }
 
 

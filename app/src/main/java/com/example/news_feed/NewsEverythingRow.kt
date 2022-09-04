@@ -10,7 +10,8 @@ class NewsEverythingRow(val model: modelArray): Item<GroupieViewHolder>() {
 
         println("This is the news title: $model.title")
 
-        viewHolder.itemView.Title.text = model.title
+        viewHolder.itemView.title_textview.text = model.title
+        viewHolder.itemView.source_textview.text = model.source
 //        viewHolder.itemView.Date.text = model.PublishedAt
 
     }
