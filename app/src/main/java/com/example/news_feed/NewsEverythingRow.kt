@@ -12,6 +12,10 @@ class NewsEverythingRow(val model: modelArray): Item<GroupieViewHolder>() {
         viewHolder.itemView.title_textview.text = model.title
 //        viewHolder.itemView.source_textview.text = model.source
         viewHolder.itemView.date_textview.text = model.publishedAt
+        viewHolder.itemView.link_to_news.setOnClickListener {
+//            TODO: Go To Website containing the news
+
+        }
 
     }
 

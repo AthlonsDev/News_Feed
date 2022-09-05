@@ -6,5 +6,6 @@ class NewsModel(var title: String, val Source: String, val Author: String, val C
 
 class modelArray(
     var title: String,
-    var publishedAt: String
+    var publishedAt: String,
+    var url: String
 )

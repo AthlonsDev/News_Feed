@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                     response.articles.forEach1 {
                         println(it.urlToImage)
                         if(it.title != null && it.source != null) {
-                            val news = modelArray(it.title, it.publishedAt)
+                            val news = modelArray(it.title, it.publishedAt, it.url)
                             adapter.add(NewsEverythingRow(news))
                         }
 
