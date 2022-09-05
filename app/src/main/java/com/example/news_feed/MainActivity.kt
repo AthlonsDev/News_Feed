@@ -1,7 +1,9 @@
 package com.example.news_feed
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.kwabenaberko.newsapilib.NewsApiClient
 import com.kwabenaberko.newsapilib.NewsApiClient.ArticlesResponseCallback
@@ -20,6 +22,7 @@ import kotlin.collections.forEach as forEach1
 class MainActivity : AppCompatActivity() {
 
     val adapter = GroupAdapter<GroupieViewHolder>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
