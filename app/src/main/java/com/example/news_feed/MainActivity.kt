@@ -1,6 +1,8 @@
 package com.example.news_feed
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -63,19 +65,25 @@ class MainActivity : AppCompatActivity() {
                         if(it.title != null && it.source != null) {
                             val news = modelArray(it.title, it.publishedAt, it.url)
                             adapter.add(NewsEverythingRow(news))
+
+                            adapter.setOnItemClickListener { item, view ->
+                                val newsItem = item as NewsEverythingRow
+                                val url = it.url
+                                val openURL = Intent(Intent.ACTION_VIEW)
+                                openURL.data = Uri.parse(url)
+                                val intent = Intent(Intent.ACTION_VIEW)
+                                println(url)
+//                                val intent = Intent(view.context, url)
+                                startActivity(intent)
+
+//                                TODO: Add WebView ClassClicki
+
+                            }
                         }
 
+
+
                     }
-
-//                    Headlines show only Titles and Dates
-
-
-//                    headline_text.text = response.articles[0].title
-//                    news_author.text = response.articles[0].author
-//                    news_date.text = response.articles[0].publishedAt
-//                    news_URL.text = "Link $response.articles[0].url"
-
-
                 }
                 override fun onFailure(throwable: Throwable) {
                     Log.d("NewsPrint", throwable.message.toString())

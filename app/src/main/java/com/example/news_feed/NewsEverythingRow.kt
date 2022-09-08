@@ -42,6 +42,7 @@ class NewsEverythingRow(val model: modelArray): Item<GroupieViewHolder>() {
 
 }
 
+
 class DetailViewHolder(private val customView: View, var obj: modelArray? = null): GroupieViewHolder (customView) {
 
     companion object {
