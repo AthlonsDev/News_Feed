@@ -50,6 +50,9 @@ class MainActivity : AppCompatActivity() {
             getHeadlines(newsApiClient)
     }
 
+    companion object {
+        val NEWS_KEY = "NEWS_KEY"
+    }
 
     private fun getHeadlines(newsApiClient: NewsApiClient) {
         newsApiClient.getTopHeadlines(
@@ -68,15 +71,14 @@ class MainActivity : AppCompatActivity() {
 
                             adapter.setOnItemClickListener { item, view ->
                                 val newsItem = item as NewsEverythingRow
-                                val url = it.url
-                                val openURL = Intent(Intent.ACTION_VIEW)
-                                openURL.data = Uri.parse(url)
+                                val url = item.url
                                 val intent = Intent(Intent.ACTION_VIEW)
-                                println(url)
+                                intent.putExtra(NEWS_KEY, url)
+                                println(item.url)
 //                                val intent = Intent(view.context, url)
                                 startActivity(intent)
 
-//                                TODO: Add WebView ClassClicki
+//                                TODO: Add WebView Class
 
                             }
                         }

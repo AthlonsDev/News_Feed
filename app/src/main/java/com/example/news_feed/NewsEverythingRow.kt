@@ -12,26 +12,21 @@ import kotlinx.android.synthetic.main.news_row_layout.view.*
 
 class NewsEverythingRow(val model: modelArray): Item<GroupieViewHolder>() {
 
-    
+    var url = String()
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 
         viewHolder.itemView.title_textview.text = model.title
 //        viewHolder.itemView.source_textview.text = model.source
         viewHolder.itemView.date_textview.text = model.publishedAt
-        var url = model.url
-        viewHolder.itemView.link_to_news.setOnClickListener {
+        url = model.url
+//        viewHolder.itemView.link_to_news.setOnClickListener {
 //            TODO: Go To Website containing the news
-            if (!url.startsWith("http://") && !url.startsWith("https://"))
-                url = "http://" + url;
-            val openURL = Intent(android.content.Intent.ACTION_VIEW)
-            openURL.data = Uri.parse(url)
-
-
-//            context.context.startActivity(openURL)
-
-
-        }
+//            if (!url.startsWith("http://") && !url.startsWith("https://"))
+//                url = "http://" + url;
+//            val openURL = Intent(android.content.Intent.ACTION_VIEW)
+//            openURL.data = Uri.parse(url)
+//        }
 
     }
 
