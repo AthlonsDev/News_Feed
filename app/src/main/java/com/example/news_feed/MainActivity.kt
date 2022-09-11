@@ -76,9 +76,14 @@ class MainActivity : AppCompatActivity() {
                                 intent.putExtra(NEWS_KEY, url)
                                 println(item.url)
 //                                val intent = Intent(view.context, url)
-                                startActivity(intent)
+//                                startActivity(intent)
 
 //                                TODO: Add WebView Class
+
+                                val intentWeb = Intent(view.context, WebViewActivity::class.java)
+//                                insert url data on companion object
+                                intentWeb.putExtra(NEWS_KEY, url)
+                                startActivity(intentWeb)
 
                             }
                         }
