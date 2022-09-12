@@ -48,6 +48,8 @@ class MainActivity : AppCompatActivity() {
 //        getEverything(newsApiClient)
 
             getHeadlines(newsApiClient)
+
+        supportActionBar?.title = "Get The News"
     }
 
     companion object {

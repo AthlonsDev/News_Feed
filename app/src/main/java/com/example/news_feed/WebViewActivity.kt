@@ -13,6 +13,9 @@ class WebViewActivity: AppCompatActivity() {
 
         setContentView(R.layout.web_view_layout)
 
+        // set toolbar as support action bar
+
+
         val newsLink = intent.getStringExtra(MainActivity.NEWS_KEY)
 
 //        Enables javascript on the webview
@@ -27,6 +30,11 @@ class WebViewActivity: AppCompatActivity() {
         println("News Link: " + newsLink)
 
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
 

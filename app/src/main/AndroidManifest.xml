@@ -23,8 +23,12 @@
         <activity android:name=".WebViewActivity"
             android:label="Webview"
             android:launchMode="singleTop">
-
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity">
+            </meta-data>
         </activity>
+
     </application>
 
 </manifest>
