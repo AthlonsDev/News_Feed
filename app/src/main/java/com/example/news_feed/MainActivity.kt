@@ -1,11 +1,17 @@
 package com.example.news_feed
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.SearchView
+import android.widget.SearchView.OnQueryTextListener
 import androidx.appcompat.app.AppCompatActivity
 import com.kwabenaberko.newsapilib.NewsApiClient
 import com.kwabenaberko.newsapilib.NewsApiClient.ArticlesResponseCallback
@@ -49,6 +55,7 @@ class MainActivity : AppCompatActivity() {
 
             getHeadlines(newsApiClient)
 
+
         supportActionBar?.title = "Get The News"
     }
 
@@ -56,10 +63,12 @@ class MainActivity : AppCompatActivity() {
         val NEWS_KEY = "NEWS_KEY"
     }
 
+    var query = String
+
     private fun getHeadlines(newsApiClient: NewsApiClient) {
         newsApiClient.getTopHeadlines(
             TopHeadlinesRequest.Builder()
-                .q("NASA")
+                .q(query.toString())
                 .language("en")
                 .build(),
             object : ArticlesResponseCallback {
@@ -154,5 +163,27 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        return super.onCreateOptionsMenu(menu)
+
+        menuInflater.inflate(R.menu.menu_bar, menu)
+        val searchItem = menu?.findItem(R.id.menu_search)
+
+          val searchView = searchItem?.actionView as SearchView
+            searchView.setOnQueryTextListener(object : OnQueryTextListener{
+                override fun onQueryTextSubmit(p0: String?): Boolean {
+                    return true
+                }
+
+                override fun onQueryTextChange(p0: String?): Boolean {
+                    return true
+                }
+
+            })
+
+        return super.onCreateOptionsMenu(menu)
+
+    }
 
 }

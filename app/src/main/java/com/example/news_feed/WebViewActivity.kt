@@ -13,8 +13,6 @@ class WebViewActivity: AppCompatActivity() {
 
         setContentView(R.layout.web_view_layout)
 
-        // set toolbar as support action bar
-
 
         val newsLink = intent.getStringExtra(MainActivity.NEWS_KEY)
 
