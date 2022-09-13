@@ -31,14 +31,15 @@ class MainActivity : AppCompatActivity() {
 
     val adapter = GroupAdapter<GroupieViewHolder>()
 
+    val API_KEY = "09222197a3ee462bb339130b1c2089c0"
+
+    val newsApiClient = NewsApiClient(API_KEY)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val API_KEY = "09222197a3ee462bb339130b1c2089c0"
 
-        val newsApiClient = NewsApiClient(API_KEY)
 
 //        headlines_button.setOnClickListener {
 //            getHeadlines(newsApiClient)
@@ -52,8 +53,9 @@ class MainActivity : AppCompatActivity() {
         news_recycler_view.adapter = adapter
 
 //        getEverything(newsApiClient)
+        val query = "NASA"
 
-            getHeadlines(newsApiClient)
+        getHeadlines(query)
 
 
         supportActionBar?.title = "Get The News"
@@ -63,9 +65,8 @@ class MainActivity : AppCompatActivity() {
         val NEWS_KEY = "NEWS_KEY"
     }
 
-    var query = String
-
-    private fun getHeadlines(newsApiClient: NewsApiClient) {
+    private fun getHeadlines(query: String) {
+        adapter.clear()
         newsApiClient.getTopHeadlines(
             TopHeadlinesRequest.Builder()
                 .q(query.toString())
@@ -78,8 +79,8 @@ class MainActivity : AppCompatActivity() {
                         println(it.urlToImage)
                         if(it.title != null && it.source != null) {
                             val news = modelArray(it.title, it.publishedAt, it.url)
-                            adapter.add(NewsEverythingRow(news))
 
+                            adapter.add(NewsEverythingRow(news))
                             adapter.setOnItemClickListener { item, view ->
                                 val newsItem = item as NewsEverythingRow
                                 val url = item.url
@@ -173,10 +174,13 @@ class MainActivity : AppCompatActivity() {
           val searchView = searchItem?.actionView as SearchView
             searchView.setOnQueryTextListener(object : OnQueryTextListener{
                 override fun onQueryTextSubmit(p0: String?): Boolean {
+                    getHeadlines(p0.toString())
+                    println(p0)
                     return true
                 }
 
                 override fun onQueryTextChange(p0: String?): Boolean {
+//                    query = p0.toString()
                     return true
                 }
 
