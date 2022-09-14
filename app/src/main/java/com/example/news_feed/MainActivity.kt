@@ -3,11 +3,9 @@ package com.example.news_feed
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
@@ -56,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         val query = "NASA"
 
         getHeadlines(query)
+
 
 
         supportActionBar?.title = "Get The News"
@@ -176,6 +175,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onQueryTextSubmit(p0: String?): Boolean {
                     getHeadlines(p0.toString())
                     println(p0)
+                    closeKeyBoard()
                     return true
                 }
 
@@ -190,4 +190,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun closeKeyBoard() {
+        val view = this.currentFocus
+        if (view != null) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
 }
