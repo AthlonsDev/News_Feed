@@ -51,10 +51,10 @@ class MainActivity : AppCompatActivity() {
 
         news_recycler_view.adapter = adapter
 
-//        getEverything(newsApiClient)
+        getEverything(newsApiClient)
         val query = "NASA"
 
-        getHeadlines(query)
+//        getHeadlines(query)
 
 
 
@@ -119,8 +119,36 @@ class MainActivity : AppCompatActivity() {
             object : ArticlesResponseCallback {
                 override fun onSuccess(response: ArticleResponse) {
 
-                    for (i in 0..response.articles.size - 1) {
-                        Log.d("NewsPrint", response.articles[i].toString())
+                    response.articles.forEach1 {
+                        println(it.urlToImage)
+                        if(it.title != null && it.source != null) {
+                            println("link to image: " + it.urlToImage)
+//                            init modelArray as news constant and complete with constructors
+                            val news = modelArray(it.title, it.publishedAt, it.url)
+//                             Add the new object(with assigned values) to the adapter(recyclerVIew)
+                            adapter.add(NewsEverythingRow(news))
+
+                            adapter.setOnItemClickListener { item, view ->
+//                                Downcast item as NewsEverythingRow object
+                                item as NewsEverythingRow
+//                                assign item's url to constant
+                                val url = item.url
+//                                Specify nature of intent
+                                val intent = Intent(Intent.ACTION_VIEW)
+//                                Insert url in Companion Object
+                                intent.putExtra(NEWS_KEY, url)
+//                                declare intent to open class
+                                val intentWeb = Intent(view.context, WebViewActivity::class.java)
+//                                insert url data on companion object
+                                intentWeb.putExtra(NEWS_KEY, url)
+//                                start activity that opens the intent/class of webview
+                                startActivity(intentWeb)
+
+                            }
+                        }
+
+
+
                     }
 
                 }
