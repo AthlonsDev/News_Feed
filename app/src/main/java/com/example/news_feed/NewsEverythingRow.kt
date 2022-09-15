@@ -14,44 +14,21 @@ class NewsEverythingRow(val model: modelArray): Item<GroupieViewHolder>() {
 
     var url = String()
 
+    companion object {
+        val NEWS_KEY = "NEWS_KEY"
+    }
+
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 
         viewHolder.itemView.title_textview.text = model.title
-//        viewHolder.itemView.source_textview.text = model.source
         viewHolder.itemView.date_textview.text = model.publishedAt
         url = model.url
-//        viewHolder.itemView.link_to_news.setOnClickListener {
-//            TODO: Go To Website containing the news
-//            if (!url.startsWith("http://") && !url.startsWith("https://"))
-//                url = "http://" + url;
-//            val openURL = Intent(android.content.Intent.ACTION_VIEW)
-//            openURL.data = Uri.parse(url)
-//        }
+
 
     }
 
     override fun getLayout(): Int {
         return R.layout.news_row_layout
-    }
-
-
-}
-
-
-class DetailViewHolder(private val customView: View, var obj: modelArray? = null): GroupieViewHolder (customView) {
-
-    companion object {
-        val NEWS_DATA_KEY = "NEWS_DATA_LINK"
-    }
-
-    init {
-        customView.setOnClickListener {
-            val intent = Intent(customView.context, MainActivity::class.java)
-//            intent.putExtra(NEWS_DATA_KEY, obj?.link)
-            customView.context.startActivity(intent)
-        }
-
-
     }
 
 

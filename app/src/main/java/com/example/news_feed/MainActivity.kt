@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import android.widget.SearchView.OnQueryTextListener
 import androidx.appcompat.app.AppCompatActivity
+import com.example.news_feed.NewsEverythingRow.Companion.NEWS_KEY
 import com.kwabenaberko.newsapilib.NewsApiClient
 import com.kwabenaberko.newsapilib.NewsApiClient.ArticlesResponseCallback
 import com.kwabenaberko.newsapilib.NewsApiClient.SourcesCallback
@@ -60,9 +61,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = "Get The News"
     }
 
-    companion object {
-        val NEWS_KEY = "NEWS_KEY"
-    }
+
 
     private fun getHeadlines(query: String) {
         adapter.clear()
@@ -77,23 +76,25 @@ class MainActivity : AppCompatActivity() {
                     response.articles.forEach1 {
                         println(it.urlToImage)
                         if(it.title != null && it.source != null) {
+//                            init modelArray as news constant and complete with constructors
                             val news = modelArray(it.title, it.publishedAt, it.url)
-
+//                             Add the new object(with assigned values) to the adapter(recyclerVIew)
                             adapter.add(NewsEverythingRow(news))
+
                             adapter.setOnItemClickListener { item, view ->
-                                val newsItem = item as NewsEverythingRow
+//                                Downcast item as NewsEverythingRow object
+                                item as NewsEverythingRow
+//                                assign item's url to constant
                                 val url = item.url
+//                                Specify nature of intent
                                 val intent = Intent(Intent.ACTION_VIEW)
+//                                Insert url in Companion Object
                                 intent.putExtra(NEWS_KEY, url)
-                                println(item.url)
-//                                val intent = Intent(view.context, url)
-//                                startActivity(intent)
-
-//                                TODO: Add WebView Class
-
+//                                declare intent to open class
                                 val intentWeb = Intent(view.context, WebViewActivity::class.java)
 //                                insert url data on companion object
                                 intentWeb.putExtra(NEWS_KEY, url)
+//                                start activity that opens the intent/class of webview
                                 startActivity(intentWeb)
 
                             }
@@ -120,21 +121,8 @@ class MainActivity : AppCompatActivity() {
 
                     for (i in 0..response.articles.size - 1) {
                         Log.d("NewsPrint", response.articles[i].toString())
-
-//                        adapter.add(NewsEverythingRow(NewsModel()))
                     }
 
-
-
-//                    headline_text.text = response.articles[0].title
-//                    if(response.articles[0].content != null){
-//                        news_content.text = response.articles[0].content
-//                    } else {
-//                        news_content.text = "News Content Unavailable"
-//                    }
-//                    news_author.text = "Author: " + response.articles[0].author
-//                    news_date.text = "Published At" + response.articles[0].publishedAt
-//                    news_URL.text = "Link: " + response.articles[0].url
                 }
 
                 override fun onFailure(throwable: Throwable) {

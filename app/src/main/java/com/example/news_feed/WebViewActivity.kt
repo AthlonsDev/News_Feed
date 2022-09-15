@@ -14,7 +14,7 @@ class WebViewActivity: AppCompatActivity() {
         setContentView(R.layout.web_view_layout)
 
 
-        val newsLink = intent.getStringExtra(MainActivity.NEWS_KEY)
+        val newsLink = intent.getStringExtra(NewsEverythingRow.NEWS_KEY)
 
 //        Enables javascript on the webview
         web_view_news.settings.javaScriptEnabled = true
