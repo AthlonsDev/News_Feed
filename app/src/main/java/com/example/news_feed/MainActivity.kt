@@ -12,6 +12,7 @@ import android.widget.SearchView
 import android.widget.SearchView.OnQueryTextListener
 import androidx.appcompat.app.AppCompatActivity
 import com.example.news_feed.NewsEverythingRow.Companion.NEWS_KEY
+import com.example.news_feed.NewsEverythingRow.Companion.NEWS_TITLE
 import com.kwabenaberko.newsapilib.NewsApiClient
 import com.kwabenaberko.newsapilib.NewsApiClient.ArticlesResponseCallback
 import com.kwabenaberko.newsapilib.NewsApiClient.SourcesCallback
@@ -122,7 +123,7 @@ class MainActivity : AppCompatActivity() {
                     response.articles.forEach1 {
                         println(it.urlToImage)
                         if(it.title != null && it.source != null) {
-                            println("link to image: " + it.urlToImage)
+
 //                            init modelArray as news constant and complete with constructors
                             val news = modelArray(it.title, it.publishedAt, it.url)
 //                             Add the new object(with assigned values) to the adapter(recyclerVIew)
@@ -133,6 +134,7 @@ class MainActivity : AppCompatActivity() {
                                 item as NewsEverythingRow
 //                                assign item's url to constant
                                 val url = item.url
+                                val title = item.model.title
 //                                Specify nature of intent
                                 val intent = Intent(Intent.ACTION_VIEW)
 //                                Insert url in Companion Object
@@ -141,6 +143,7 @@ class MainActivity : AppCompatActivity() {
                                 val intentWeb = Intent(view.context, WebViewActivity::class.java)
 //                                insert url data on companion object
                                 intentWeb.putExtra(NEWS_KEY, url)
+                                intentWeb.putExtra(NEWS_TITLE, title)
 //                                start activity that opens the intent/class of webview
                                 startActivity(intentWeb)
 

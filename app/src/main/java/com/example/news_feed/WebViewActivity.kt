@@ -3,6 +3,7 @@ package com.example.news_feed
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.news_feed.NewsEverythingRow.Companion.NEWS_TITLE
 import kotlinx.android.synthetic.main.web_view_layout.*
 
 class WebViewActivity: AppCompatActivity() {
@@ -12,6 +13,10 @@ class WebViewActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.web_view_layout)
+
+        supportActionBar?.title = intent.getStringExtra(NEWS_TITLE)
+
+
 
 
         val newsLink = intent.getStringExtra(NewsEverythingRow.NEWS_KEY)

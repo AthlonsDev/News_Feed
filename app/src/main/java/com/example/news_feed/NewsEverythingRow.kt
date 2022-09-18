@@ -16,6 +16,7 @@ class NewsEverythingRow(val model: modelArray): Item<GroupieViewHolder>() {
 
     companion object {
         val NEWS_KEY = "NEWS_KEY"
+        val NEWS_TITLE = "NEWS_TITLE"
     }
 
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
